@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.1/dist/full.min.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    
+    <div class="hero min-h-screen bg-base-200" id="main">
+        <div class="hero-content flex-col lg:flex-row-reverse w-3/5">
+          <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <form class="card-body mt-1">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Stack_Overflow.png" alt="" class="w-15 h-30">
+              <div class="divider divider-accent mt-1 mb-1"></div>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Email</span>
+                </label>
+                <input
+                  type="email"
+                  placeholder="email"
+                  class="input input-bordered input-accent w-full max-w-xs" id="email"
+                />
+              </div>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Password</span>
+                </label>
+                <input
+                  type="password"
+                  placeholder="password"
+                  class="input input-bordered input-accent w-full max-w-xs" id="password"/>
+              </div>
+              <div>
+                <a class="link link-accent mt-5 no-underline" id="loginButton">Login</a>
+              </div>
+              <div class="form-control mt-6 w-full">
+                <button class="btn btn-accent" id="registerButton">Register</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  
+
+      <div id="Loader" class="flex justify-center item-center w-full h-screen text-7xl">
+        <span class="loading loading-bars loading-lg text-accent"></span>
+      </div>
+
+
+
+
+
+
+
+
+
+    <script src="register.js" type="module"></script>
+    <script src="../firebase.js" type="module"></script>
+</body>
+</html>
