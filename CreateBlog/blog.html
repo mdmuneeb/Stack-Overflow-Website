@@ -17,29 +17,29 @@
               <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Stack_Overflow.png" class="h-14 pl-3" alt="">
             </span>
          <div class="flex-none pr-3">
-              <button class="btn btn-info">Logout</button>
+              <button class="btn btn-info" id="logoutButton">Logout</button>
           </div>
         </div>
 
 
         <div class="pt-10">
-          <h1 class="font-bold text-3xl pl-5">Create Blog Or Ask Question</h1>
+          <h1 class="font-bold text-3xl pl-5 translate-x-36">Create Blog Or Ask Question</h1>
           <div class="divider"></div>
           
           
           <div class="w-3/4 translate-x-40 mb-20">
             <div class="flex justify-between">
               <div class="">
-                <h2>Title</h2>
+                <h2 class="font-bold text-2xl mb-3">Title</h2>
                 <input type="text" placeholder="Type here" class="input input-bordered input-info w-full"/>
               </div>
               <div >
-                <label>Select Category</label>
-                <select class="select select-info w-full max-w-xs">
+                <label class="font-bold text-2xl">Select Category</label>
+                <select class="select select-info w-full max-w-xs mt-2">
                   <option disabled selected>Select language</option>
-                  <option>English</option>
-                  <option>Japanese</option>
-                  <option>Italian</option>
+                  <option>Javascript</option>
+                  <option>CSS</option>
+                  <option>HTML</option>
                 </select>
               </div>
             </div>
@@ -47,28 +47,28 @@
 
     
           <div class="w-3/4 translate-x-40 mb-20">
-            <div class="flex justify-between">
+            <div class="flex justify-between ">
               <div>
-                <h2>Select Type</h2>
+                <h2 class="font-bold text-2xl mb-5">Select Type</h2>
                 <div class="flex">
-                  <div>
+                  <div class="space-x-3">
                     <input type="radio" name="radio-7" class="radio radio-info" />
                     <label>Blog</label>
                   </div>
-                  <div>
+                  <div class="space-x-3 ml-5">
                     <input type="radio" name="radio-7" class="radio radio-info" />
                     <label>Question</label>
                   </div>
                 </div>
               </div>
               <div>
-                <h2>Select Status</h2>
+                <h2 class="font-bold text-2xl mb-5">Select Status</h2>
                 <div class="flex">
-                  <div>
+                  <div class="space-x-3">
                     <input type="radio" name="radio-7" class="radio radio-info" />
                     <label>Active</label>
                   </div>
-                  <div>
+                  <div class="space-x-3 ml-5">
                     <input type="radio" name="radio-7" class="radio radio-info" />
                     <label>In Active</label>
                   </div>
@@ -79,10 +79,10 @@
           </div>
 
 
-          <div class="flex justify-center">
+          <div class="flex justify-center mr-16">
             <div class="">
-              <label class="block pb-5">Description</label>
-              <textarea class="textarea textarea-info" placeholder="Bio" cols="180" rows="4" placeholder="Quill or Rich text Editor"></textarea>
+              <label class="block pb-5 font-bold text-2xl ">Description</label>
+              <textarea class="textarea textarea-info" placeholder="Bio" cols="170" rows="4" placeholder="Quill or Rich text Editor"></textarea>
             </div>
           </div>
 

@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider,onAuthStateChanged    } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider,onAuthStateChanged, signInWithPopup, signOut    } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js'
 
 
 const firebaseConfig = {
@@ -25,6 +25,7 @@ export
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     onAuthStateChanged,
-    provider
-
+    provider,
+    signInWithPopup,
+    signOut
 }

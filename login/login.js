@@ -1,4 +1,4 @@
-import { auth, signInWithEmailAndPassword } from "../firebase.js";
+import { auth, signInWithEmailAndPassword, provider, signInWithPopup, onAuthStateChanged } from "../firebase.js";
 
 
 
@@ -10,6 +10,7 @@ const registerBtn = document.getElementById("registerButton");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const loginBtn = document.getElementById("loginButton"); 
+const googleBtn = document.getElementById("googleButton");
 Loader.style.display = "None";
 
 
@@ -50,5 +51,39 @@ const Login = (event) =>
     }
 }
 
+const googleLogin = (event) =>
+{
+    event.preventDefault();
+    signInWithPopup(auth, provider)
+  .then((result) => {
+   console.log(result);
+    window.location.href = "/main/main.html";
+  }).catch((error) => {
+    console.log("Error", error);
+  });
+}
+
+
+
+const load =() =>
+{
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      alert("You are aready logged in");
+      window.location.href = "/main/main.html";
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+}
+
+load()
+
+
+
+
 registerBtn.addEventListener("click", loader);
 loginBtn.addEventListener("click", Login);
+googleBtn.addEventListener("click", googleLogin);
