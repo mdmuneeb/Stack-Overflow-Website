@@ -7,8 +7,6 @@ import { auth, signInWithEmailAndPassword, provider, signInWithPopup, onAuthStat
 const Loader = document.getElementById("Loader");
 const main = document.getElementById("main");
 const registerBtn = document.getElementById("registerButton");
-const email = document.getElementById("email");
-const password = document.getElementById("password");
 const loginBtn = document.getElementById("loginButton"); 
 const googleBtn = document.getElementById("googleButton");
 Loader.style.display = "None";
@@ -29,7 +27,8 @@ const loader = () =>
 
 const Login = (event) =>
 {
-    event.preventDefault();
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
     if (email.value !== "" && password.value !== "")
     {
         signInWithEmailAndPassword(auth, email.value, password.value)
@@ -49,11 +48,11 @@ const Login = (event) =>
     {
         alert("Enter the required paramters");
     }
+    event.preventDefault();
 }
 
 const googleLogin = (event) =>
 {
-    event.preventDefault();
     signInWithPopup(auth, provider)
   .then((result) => {
    console.log(result);
@@ -61,25 +60,20 @@ const googleLogin = (event) =>
   }).catch((error) => {
     console.log("Error", error);
   });
+  event.preventDefault();
+
 }
 
 
+onAuthStateChanged(auth, (user) => {
+  if (user && user.emailVerified) {
+    const uid = user.uid;
+    window.location.href = "/main/main.html";
+  } else {
+    console.log("User not login");
+  }
+});
 
-const load =() =>
-{
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      alert("You are aready logged in");
-      window.location.href = "/main/main.html";
-    } else {
-      // User is signed out
-      // ...
-    }
-  });
-}
-
-load()
 
 
 

@@ -1,22 +1,26 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider,onAuthStateChanged, signInWithPopup, signOut    } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js'
+import { getFirestore, doc, setDoc, getDocs, collection } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js'
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider,onAuthStateChanged, signInWithPopup, signOut, sendEmailVerification, updateProfile } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js'
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBCHMGPvvTRIIBBSjKwuFP3rhKtqgLiGAk",
-    authDomain: "stack-overflow-7757c.firebaseapp.com",
-    projectId: "stack-overflow-7757c",
-    storageBucket: "stack-overflow-7757c.appspot.com",
-    messagingSenderId: "3524755883",
-    appId: "1:3524755883:web:d0c1f40ddffdbbbd2892ee",
-    measurementId: "G-TJHPQB5DC9"
-};
+    apiKey: "AIzaSyBQs7Cz7zC6tCkeRe0idQQNLwRK-G5AU_M",
+    authDomain: "stack-overflow-fc881.firebaseapp.com",
+    projectId: "stack-overflow-fc881",
+    storageBucket: "stack-overflow-fc881.appspot.com",
+    messagingSenderId: "896999205306",
+    appId: "1:896999205306:web:0459254dda55b7f6d09583",
+    measurementId: "G-K2FMY20L3K"
+  };
   
-
+  
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider 
+const provider = new GoogleAuthProvider;
+const db = getFirestore(app);
+const storage = getStorage();
 
 
 export
@@ -27,5 +31,20 @@ export
     onAuthStateChanged,
     provider,
     signInWithPopup,
-    signOut
+    signOut,
+    sendEmailVerification,
+    doc,
+    setDoc,
+    updateProfile,
+    uploadBytes,
+    ref,
+    getStorage,
+    getDownloadURL,
+    getFirestore,
+    app,
+    db,
+    storage,
+    getDocs,
+    collection
+
 }

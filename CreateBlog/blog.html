@@ -31,11 +31,11 @@
             <div class="flex justify-between">
               <div class="">
                 <h2 class="font-bold text-2xl mb-3">Title</h2>
-                <input type="text" placeholder="Type here" class="input input-bordered input-info w-full"/>
+                <input type="text" placeholder="Type here" id="title" class="input input-bordered input-info w-full" />
               </div>
               <div >
                 <label class="font-bold text-2xl">Select Category</label>
-                <select class="select select-info w-full max-w-xs mt-2">
+                <select class="select select-info w-full max-w-xs mt-2" id="selectLanguage">
                   <option disabled selected>Select language</option>
                   <option>Javascript</option>
                   <option>CSS</option>
@@ -52,11 +52,11 @@
                 <h2 class="font-bold text-2xl mb-5">Select Type</h2>
                 <div class="flex">
                   <div class="space-x-3">
-                    <input type="radio" name="radio-7" class="radio radio-info" />
+                    <input type="radio" name="blogRadio" value="Blog" class="radio radio-info" />
                     <label>Blog</label>
                   </div>
                   <div class="space-x-3 ml-5">
-                    <input type="radio" name="radio-7" class="radio radio-info" />
+                    <input type="radio" name="blogRadio" value="Question" class="radio radio-info"/>
                     <label>Question</label>
                   </div>
                 </div>
@@ -65,11 +65,11 @@
                 <h2 class="font-bold text-2xl mb-5">Select Status</h2>
                 <div class="flex">
                   <div class="space-x-3">
-                    <input type="radio" name="radio-7" class="radio radio-info" />
+                    <input type="radio" name="radio-7" value="Active" class="radio radio-info"/>
                     <label>Active</label>
                   </div>
                   <div class="space-x-3 ml-5">
-                    <input type="radio" name="radio-7" class="radio radio-info" />
+                    <input type="radio" name="radio-7" value="In Active" class="radio radio-info" />
                     <label>In Active</label>
                   </div>
                 </div>
@@ -82,12 +82,18 @@
           <div class="flex justify-center mr-16">
             <div class="">
               <label class="block pb-5 font-bold text-2xl ">Description</label>
-              <textarea class="textarea textarea-info" placeholder="Bio" cols="170" rows="4" placeholder="Quill or Rich text Editor"></textarea>
+              <textarea class="textarea textarea-info" id="description" placeholder="Bio" cols="170" rows="4" placeholder="Quill or Rich text Editor"></textarea>
             </div>
           </div>
 
+
           <div class="translate-x-40 mt-5 mb-10">
-            <button class="btn btn-info w-32">Save</button>
+            <label class="block pb-5 font-bold text-2xl">Image</label> 
+            <input type="file" id="imageInput" class="file-input file-input-bordered file-input-info w-full max-w-xs" />
+          </div>
+
+          <div class="translate-x-40 mt-5 mb-10">
+            <button class="btn btn-info w-32" id="saveButton">Save</button>
             <button class="btn btn-error w-32">Cancel</button>
           </div>
 
