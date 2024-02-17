@@ -1,4 +1,4 @@
-import {auth, signOut, setDoc, doc, db, ref, uploadBytes, storage } from "../firebase.js";
+import {auth, signOut, setDoc, doc, db, ref, uploadBytes, storage, onAuthStateChanged } from "../firebase.js";
 
 
 
@@ -17,6 +17,8 @@ let checking = () =>
         if (user.emailVerified) {
           const uid = user.uid;
           name = user.displayName;
+
+          console.log(name);
         } else {
           console.log("Email not verified");
         }
@@ -32,22 +34,12 @@ checking();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 const createBlog = async() =>
 {
   let typeRadio = document.querySelector("input[name=blogRadio]:checked");
   let statusRadio = document.querySelector("input[name=radio-7]:checked");
 
+  console.log(name);
   console.log(Title.value);
   console.log(selectLanguage.value);
   console.log(typeRadio.value);
@@ -56,7 +48,8 @@ const createBlog = async() =>
   console.log(imageInput.files[0]);
   if(Title.value != "" && selectLanguage.value != "" && typeRadio.value != "" && statusRadio.value != "" && description.value !="" && imageInput.files[0])
   {
-    
+    let uploadDate = new Date();
+    console.log(`${uploadDate.toLocaleDateString('en-US', { month: 'long' })} ${uploadDate.getDate()}, ${uploadDate.getFullYear()}`);
 
     if (typeRadio.value === "Blog")
     {
@@ -66,6 +59,8 @@ const createBlog = async() =>
         Langugae: selectLanguage.value,
         Status: statusRadio.value,
         Descrition: description.value,
+        authorName: name,
+        date: uploadDate
       });
     }
     else if (typeRadio.value === "Question")
@@ -76,6 +71,8 @@ const createBlog = async() =>
         Langugae: selectLanguage.value,
         Status: statusRadio.value,
         Descrition: description.value,
+        authorName: name,
+        date: uploadDate
       });      
     }
 

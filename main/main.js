@@ -1,4 +1,4 @@
-import { auth, onAuthStateChanged, getDocs, doc, db, collection, storage, ref, getDownloadURL  } from "../firebase.js";
+import { auth, onAuthStateChanged, getDocs, doc, db, collection, storage, ref, getDownloadURL,getDoc } from "../firebase.js";
 
 
 const loginBtn = document.getElementById("loginButton");
@@ -7,6 +7,8 @@ let userName = document.getElementById("userName");
 let useremail = document.getElementById("useremail");
 let userverification = document.getElementById("userverification");
 let showData = document.getElementById("showData");
+let dataContent;
+let imageContect;
 
 
 
@@ -35,7 +37,7 @@ let createBox = (title, desc, imageURL, authorName, date) =>
   imageDivTag.classList.add("ml-12", "flex-2");
   finalTag.classList.add("card-body");
   imageTag.classList.add("w-60", "h-52", "mr-3");
-  finalWalaTag.classList.add("card","w-5/6","bg-base-100", "shadow", "hover:shadow-lg");
+  finalWalaTag.classList.add("card","w-5/6","bg-base-100", "shadow", "hover:shadow-lg", "cursor-pointer");
 
 
   titleTag.textContent = title;
@@ -50,6 +52,10 @@ let createBox = (title, desc, imageURL, authorName, date) =>
   svgElement.setAttribute("stroke-width", "1.5");
   svgElement.setAttribute("stroke", "currentColor");
   svgElement.setAttribute("class", "w-6 h-6 mr-3");
+  finalWalaTag.onclick = () =>
+  {
+    window.location.href = `/DisplayBlog/display.html?desc=${title}`;
+  }
 
   let pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
   pathElement.setAttribute("stroke-linecap", "round");
@@ -103,7 +109,6 @@ onAuthStateChanged(auth, (user) => {
 
   let getImage = async(title) =>
   {
-    let link;
     const starsRef = ref(storage, `users/${title}`);
     return await getDownloadURL(starsRef)
   }
@@ -143,6 +148,69 @@ let getDataFromFirestore = async() =>
 getDataFromFirestore();
 
 
+let searchBox = async() =>
+{
+  const searchInput = document.getElementById("searchInput").value;
+  console.log(showData.value);
+
+  if (searchInput !== "") {
+    
+    const docRef1 = doc(db, "Bloggs", searchInput);
+    const docSnap1 = await getDoc(docRef1);
+
+    // console.log(docSnap1.data());
+    
+
+    const docRef2 = doc(db, "Questions", searchInput);
+    const docSnap2 = await getDoc(docRef2);
+  // console.log(docSnap2.data());
+
+
+
+
+    if (docSnap1.exists()) {
+      dataContent = docSnap1.data();
+      imageContect = await getImage(dataContent.Title);
+      console.log(dataContent);
+      console.log(imageContect);
+    } else if (docSnap2.exists()) {
+      dataContent = docSnap2.data();
+      imageContect = await getImage(dataContent.Title);
+      console.log(dataContent);
+      console.log(imageContect);
+    } else {
+      console.log("Document not found in either collection.");
+    }
+
+  
+    if(dataContent)
+    {
+      showData.innerHTML =""
+      createBox(dataContent.Title, dataContent.Descrition, imageContect, dataContent.authorName, dataContent.date)
+    }
+  }
+  if (searchInput === "")
+  {
+    await getDataFromFirestore();
+  }
+
+  
+
+
+  // const filteredData1 = querySnapshot1.filter(doc => doc.data().Title.toLowerCase().startsWith(searchInput));
+  // const filteredData2 = querySnapshot2.filter(doc => doc.data().Descrition.toLowerCase().startsWith(searchInput));
+  showData.value = ""; // Clear previous results
+
+  // filteredData1.forEach(async (doc) => {
+  //     let image = await getImage(doc.data().Title);
+  //     createBox(doc.data().Title, doc.data().Descrition, image, doc.data().authorName, doc.data().date);
+  // });
+
+  // filteredData2.forEach(async (doc) => {
+  //     let image = await getImage(doc.data().Title);
+  //     createBox(doc.data().Title, doc.data().Descrition, image, doc.data().authorName, doc.data().date);
+  // });
+}
 
 
 
@@ -150,6 +218,7 @@ getDataFromFirestore();
 
 
 writeBlog.addEventListener("click", () => {window.location.href = "/CreateBlog/Blog.html"})
+searchInput.addEventListener("input", searchBox);
 
 
 
