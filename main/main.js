@@ -13,7 +13,7 @@ let imageContect;
 
 
 
-let createBox = (title, desc, imageURL, authorName, date) =>
+let createBox = (title, desc, imageURL, authorName, date, type, titleUrl) =>
 {
   let parentDivTag1 = document.createElement("div");
   let parentDivTag2 = document.createElement("div");
@@ -27,21 +27,30 @@ let createBox = (title, desc, imageURL, authorName, date) =>
   let imageTag = document.createElement("img");
   let finalTag = document.createElement("div");
   let finalWalaTag = document.createElement("div");
+  let spanTag = document.createElement("p");
 
   parentDivTag1.classList.add("flex", "justify-between"); 
   parentDivTag2.classList.add("flex-1");
+  parentDivTag2.setAttribute("id", "dataHold")
   titleTag.classList.add("card-title", "font-bold");
+  titleTag.setAttribute("id", "Htitle")
   descTag.classList.add("mt-5");
-  nameDivTag.classList.add("flex", "justify-between", "mt-5");
-  nameDivTagChild.classList.add("flex");
+  nameDivTag.classList.add("flex", "justify-between", "mt-5", "relative", "h-16");
+  nameDivTagChild.classList.add("flex", "absolute", "bottom-0");
+  dateTag.classList.add("absolute", "bottom-0", "right-0");
   imageDivTag.classList.add("ml-12", "flex-2");
   finalTag.classList.add("card-body");
+  finalTag.setAttribute("id", "allcard");
   imageTag.classList.add("w-60", "h-52", "mr-3");
   finalWalaTag.classList.add("card","w-5/6","bg-base-100", "shadow", "hover:shadow-lg", "cursor-pointer");
+  spanTag.style.color = "#007FFF"
+
 
 
   titleTag.textContent = title;
-  descTag.textContent = desc;
+  descTag.textContent = `${desc.slice(0, 350)}`;
+  spanTag.textContent = ".....Read More";
+  console.log(descTag.textContent);
   nameTag.textContent = authorName;
   dateTag.textContent = date;
   imageTag.src = imageURL;
@@ -54,7 +63,7 @@ let createBox = (title, desc, imageURL, authorName, date) =>
   svgElement.setAttribute("class", "w-6 h-6 mr-3");
   finalWalaTag.onclick = () =>
   {
-    window.location.href = `/DisplayBlog/display.html?desc=${title}`;
+    window.location.href = `/DisplayBlog/display.html?desc=${titleUrl}&type=${type}`;  //
   }
 
   let pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -70,6 +79,7 @@ let createBox = (title, desc, imageURL, authorName, date) =>
   nameDivTag.appendChild(dateTag);
   imageDivTag.appendChild(imageTag);
   parentDivTag2.appendChild(titleTag);
+  descTag.appendChild(spanTag);
   parentDivTag2.appendChild(descTag);
   parentDivTag2.appendChild(nameDivTag);
 
@@ -126,10 +136,10 @@ let getDataFromFirestore = async() =>
 
 
     
-    let image = await getImage(doc.data().Title);
+    let image = await getImage(doc.id);
     console.log(image);
 
-    createBox(doc.data().Title, doc.data().Descrition, image, doc.data().authorName, doc.data().date)
+    createBox(doc.data().Title, doc.data().Descrition, image, doc.data().authorName, doc.data().date, "Bloggs", doc.id);
   });
   const querySnapshot2 = await getDocs(collection(db, "Questions"));
   querySnapshot2.forEach( async(doc) => {
@@ -137,9 +147,9 @@ let getDataFromFirestore = async() =>
     console.log(doc.id, doc.data().Descrition);
 
 
-    let image = await getImage(doc.data().Title);
+    let image = await getImage(doc.id);
     console.log(image);
-    createBox(doc.data().Title, doc.data().Descrition, image, doc.data().authorName, doc.data().date)
+    createBox(doc.data().Title, doc.data().Descrition, image, doc.data().authorName, doc.data().date, "Questions", doc.id);
 
   });
 }
@@ -150,66 +160,91 @@ getDataFromFirestore();
 
 let searchBox = async() =>
 {
-  const searchInput = document.getElementById("searchInput").value;
-  console.log(showData.value);
+  const searchInput = document.getElementById("searchInput").value.toUpperCase();
+  console.log(searchInput);
+  // console.log(showData.value);
+  let allcard = document.querySelectorAll("#allcard");
 
-  if (searchInput !== "") {
-    
-    const docRef1 = doc(db, "Bloggs", searchInput);
-    const docSnap1 = await getDoc(docRef1);
-
-    // console.log(docSnap1.data());
-    
-
-    const docRef2 = doc(db, "Questions", searchInput);
-    const docSnap2 = await getDoc(docRef2);
-  // console.log(docSnap2.data());
-
-
-
-
-    if (docSnap1.exists()) {
-      dataContent = docSnap1.data();
-      imageContect = await getImage(dataContent.Title);
-      console.log(dataContent);
-      console.log(imageContect);
-    } else if (docSnap2.exists()) {
-      dataContent = docSnap2.data();
-      imageContect = await getImage(dataContent.Title);
-      console.log(dataContent);
-      console.log(imageContect);
-    } else {
-      console.log("Document not found in either collection.");
-    }
-
-  
-    if(dataContent)
-    {
-      showData.innerHTML =""
-      createBox(dataContent.Title, dataContent.Descrition, imageContect, dataContent.authorName, dataContent.date)
-    }
-  }
-  if (searchInput === "")
+  allcard.forEach((val) =>
   {
-    await getDataFromFirestore();
-  }
+    // let dataHold = val.querySelector("#dataHold");
+    let headTag = val.querySelector("#Htitle").textContent.toUpperCase();
+    console.log(headTag);
+    if(headTag.indexOf(searchInput) >-1)
+    {
+      val.style.display = ""
+    }
+    else
+    {
+      val.style.display = "none";
+    }
+  })
+
+  // let headTag = allcard.getElementsTagName("h2")
+  // console.log(headTag);
+
+  // let headTag = dataHold.getElementsByTagName("h2");
+
+
+  // if (searchInput !== "") {
+    
+  //   const docRef1 = doc(db, "Bloggs", searchInput);
+  //   const docSnap1 = await getDoc(docRef1);
+
+  //   // console.log(docSnap1.data());
+    
+
+  //   const docRef2 = doc(db, "Questions", searchInput);
+  //   const docSnap2 = await getDoc(docRef2);
+  // // console.log(docSnap2.data());
+
+
+
+
+  //   if (docSnap1.exists()) {
+  //     dataContent = docSnap1.data();
+  //     imageContect = await getImage(dataContent.Title);
+  //     // console.log(dataContent);
+  //     // console.log(imageContect);
+  //   } else if (docSnap2.exists()) {
+  //     dataContent = docSnap2.data();
+  //     imageContect = await getImage(dataContent.Title);
+  //     // console.log(dataContent);
+  //     // console.log(imageContect);
+  //   } else {
+  //     console.log("Document not found in either collection.");
+  //   }
+
+  
+  //   if(dataContent)
+  //   {
+  //     showData.innerHTML =""
+  //     createBox(dataContent.Title, dataContent.Descrition, imageContect, dataContent.authorName, dataContent.date)
+  //   }
+  // }
+  // if (searchInput === "")
+  // {
+  //   await getDataFromFirestore();
+  // }
 
   
 
 
-  // const filteredData1 = querySnapshot1.filter(doc => doc.data().Title.toLowerCase().startsWith(searchInput));
-  // const filteredData2 = querySnapshot2.filter(doc => doc.data().Descrition.toLowerCase().startsWith(searchInput));
-  showData.value = ""; // Clear previous results
+  // // const filteredData1 = querySnapshot1.filter(doc => doc.data().Title.toLowerCase().startsWith(searchInput));
+  // // const filteredData2 = querySnapshot2.filter(doc => doc.data().Descrition.toLowerCase().startsWith(searchInput));
+  // showData.value = ""; // Clear previous results
 
-  // filteredData1.forEach(async (doc) => {
-  //     let image = await getImage(doc.data().Title);
-  //     createBox(doc.data().Title, doc.data().Descrition, image, doc.data().authorName, doc.data().date);
-  // });
+  // // filteredData1.forEach(async (doc) => {
+  // //     let image = await getImage(doc.data().Title);
+  // //     createBox(doc.data().Title, doc.data().Descrition, image, doc.data().authorName, doc.data().date);
+  // // });
 
-  // filteredData2.forEach(async (doc) => {
-  //     let image = await getImage(doc.data().Title);
-  //     createBox(doc.data().Title, doc.data().Descrition, image, doc.data().authorName, doc.data().date);
-  // });
+  // // filteredData2.forEach(async (doc) => {
+  // //     let image = await getImage(doc.data().Title);
+  // //     createBox(doc.data().Title, doc.data().Descrition, image, doc.data().authorName, doc.data().date);
+  // // });
+
+
 }
 
 

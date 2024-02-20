@@ -34,6 +34,9 @@ checking();
 
 
 
+
+
+
 const createBlog = async() =>
 {
   let typeRadio = document.querySelector("input[name=blogRadio]:checked");
@@ -46,42 +49,48 @@ const createBlog = async() =>
   console.log(statusRadio.value);
   console.log(description.value);
   console.log(imageInput.files[0]);
+  let num;
   if(Title.value != "" && selectLanguage.value != "" && typeRadio.value != "" && statusRadio.value != "" && description.value !="" && imageInput.files[0])
   {
     let uploadDate = new Date();
     console.log(`${uploadDate.toLocaleDateString('en-US', { month: 'long' })} ${uploadDate.getDate()}, ${uploadDate.getFullYear()}`);
-
+    // uploadDate = `${uploadDate.toLocaleDateString('en-US', { month: 'long' })} ${uploadDate.getDate()}, ${uploadDate.getFullYear()}`;
     if (typeRadio.value === "Blog")
     {
       console.log("Blog is running");
-      await setDoc(doc(db, "Bloggs", `${Title.value}`), {
+      num = Math.round(Math.random()*Math.pow(10, 4));
+
+      await setDoc(doc(db, "Bloggs", `${Title.value}${num}`), {
         Title: Title.value,
         Langugae: selectLanguage.value,
         Status: statusRadio.value,
         Descrition: description.value,
         authorName: name,
-        date: uploadDate
+        date: `${uploadDate.toLocaleDateString('en-US', { month: 'long' })} ${uploadDate.getDate()}, ${uploadDate.getFullYear()}`
       });
     }
     else if (typeRadio.value === "Question")
     {
       console.log("Questions is running");
-      await setDoc(doc(db, "Questions", `${Title.value}`), {
+      num = Math.round(Math.random()*Math.pow(10, 4));
+
+      await setDoc(doc(db, "Questions", `${Title.value}${num}`), {
         Title: Title.value,
         Langugae: selectLanguage.value,
         Status: statusRadio.value,
         Descrition: description.value,
         authorName: name,
-        date: uploadDate
+        date: `${uploadDate.toLocaleDateString('en-US', { month: 'long' })} ${uploadDate.getDate()}, ${uploadDate.getFullYear()}`
       });      
     }
 
 
 
-    const storageRef = ref(storage, `users/${Title.value}`);
+    const storageRef = ref(storage, `users/${Title.value}${num}`);
 
     uploadBytes(storageRef, imageInput.files[0]).then((snapshot) => {
       console.log('Uploaded a blob or file!');
+      window.location.href = "/main/main.html"
     });
     
   }
