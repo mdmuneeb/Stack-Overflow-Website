@@ -1,4 +1,4 @@
-import { auth, onAuthStateChanged, getDocs, doc, db, collection, storage, ref, getDownloadURL,getDoc } from "../firebase.js";
+import { auth, onAuthStateChanged, getDocs, doc, db, collection, storage, ref, getDownloadURL,getDoc } from "../FIREBASE/firebase.js";
 
 
 const loginBtn = document.getElementById("loginButton");
@@ -99,7 +99,6 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         const uid = user.uid;
         console.log(user);
-        loginBtn.textContent = user.displayName;
         
         if (user !== null) {
           userName.textContent =  "  Name: " + user.displayName
@@ -112,7 +111,7 @@ onAuthStateChanged(auth, (user) => {
         
     } else {
         loginBtn.textContent = "Login";
-        loginBtn.addEventListener("click", ()=>{window.location.href = "/login/login.html"});
+        loginBtn.addEventListener("click", ()=>{window.location.href = "/login/index.html"});
     }
   });
 

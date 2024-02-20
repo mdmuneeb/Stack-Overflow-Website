@@ -1,4 +1,4 @@
-import {auth, signOut, setDoc, doc, db, ref, uploadBytes, storage, onAuthStateChanged } from "../firebase.js";
+import {auth, signOut, setDoc, doc, db, ref, uploadBytes, storage, onAuthStateChanged } from "../FIREBASE/firebase.js";
 
 
 
@@ -107,7 +107,7 @@ const logout = () =>
 {
     signOut(auth).then(() => {
         // Sign-out successful.
-        window.location.href = "/login/login.html";
+        window.location.href = "/login/index.html";
       }).catch((error) => {
         // An error happened.
         console.log("Error", error);

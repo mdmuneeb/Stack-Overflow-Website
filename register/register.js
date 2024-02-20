@@ -1,4 +1,4 @@
-import { auth, createUserWithEmailAndPassword, sendEmailVerification, uploadBytes, ref, getStorage, getDownloadURL, onAuthStateChanged, updateProfile} from "../firebase.js";
+import { auth, createUserWithEmailAndPassword, sendEmailVerification, uploadBytes, ref, getStorage, getDownloadURL, onAuthStateChanged, updateProfile} from "../FIREBASE/firebase.js";
 
 
 
@@ -23,7 +23,7 @@ const loader = () =>
     Loader.style.display = "flex";
     setTimeout(() =>
     {
-        window.location = "/login/login.html";
+        window.location = "/login/index.html";
     }, 2000);
 }
 
@@ -135,7 +135,7 @@ let checking = () =>
     onAuthStateChanged(auth, (user) => {
         if (user.emailVerified) {
           const uid = user.uid;
-          window.location.href = "/login/login.html"
+          window.location.href = "/login/index.html"
         } else {
           console.log("Email not verified");
         }
