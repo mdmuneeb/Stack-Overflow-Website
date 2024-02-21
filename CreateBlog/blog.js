@@ -8,6 +8,7 @@ const selectLanguage = document.getElementById("selectLanguage");
 const description = document.getElementById("description");
 const saveButton = document.getElementById("saveButton");
 const imageInput = document.getElementById("imageInput");
+const cancelButton = document.getElementById("cancelButton");
 let name;
 
 
@@ -30,7 +31,18 @@ checking();
 
 
 
-
+let cancel = () =>
+{
+  let typeRadio = document.querySelectorAll("#st");
+  let statusRadio = document.querySelectorAll("#ss");
+  Title.value = "";
+  selectLanguage.value = "";
+  description.value = "";
+  imageInput.value = ""
+  typeRadio.value = "";
+  statusRadio.value = ""
+  window.location.href = "/main/main.html"
+}
 
 
 
@@ -119,3 +131,4 @@ const logout = () =>
 
 
 logoutBtn.addEventListener("click", logout);
+cancelButton.addEventListener("click", cancel)

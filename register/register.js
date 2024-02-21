@@ -23,7 +23,7 @@ const loader = () =>
     Loader.style.display = "flex";
     setTimeout(() =>
     {
-        window.location = "/login/index.html";
+        window.location = "/index.html";
     }, 2000);
 }
 

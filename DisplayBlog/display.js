@@ -50,11 +50,13 @@ if (docSnap1.exists()) {
   console.log(docSnap1.id);
   image = await getImage(docSnap1.id);
   console.log(data);
+  console.log(image);
 } else if (docSnap2.exists()) {
   data = docSnap2.data();
   console.log(data);
   image = await getImage(docSnap2.id);
   console.log(data);
+  console.log(image);
 } else {
   console.log("Document not found in either collection.");
 }
@@ -88,8 +90,6 @@ let likeOrNot = async(userName, userComment) =>
       {
         val.liked = !val.liked
       }
-  
-
     })
   }
   const washingtonRef = doc(db, "Comment", `${btype}_${title}`);
@@ -160,6 +160,10 @@ const creatingCommmentSection = (userName, userComment, liked) =>
 
   MainComment.appendChild(parentDivtag);
 }
+
+
+
+
 
 let realTimecomments = async() =>
 {

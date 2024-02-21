@@ -99,6 +99,7 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         const uid = user.uid;
         console.log(user);
+        loginBtn.textContent = user.displayName
         
         if (user !== null) {
           userName.textContent =  "  Name: " + user.displayName
@@ -110,6 +111,7 @@ onAuthStateChanged(auth, (user) => {
 
         
     } else {
+      
         loginBtn.textContent = "Login";
         loginBtn.addEventListener("click", ()=>{window.location.href = "/login/index.html"});
     }
@@ -131,23 +133,23 @@ let getDataFromFirestore = async() =>
   const querySnapshot1 = await getDocs(collection(db, "Bloggs"));
   querySnapshot1.forEach(async(doc) => {
     // doc.data() is never undefined for query doc snapshots
-    console.log(doc.id, doc.data().Title);
+    // console.log(doc.id, doc.data().Title);
 
 
     
     let image = await getImage(doc.id);
-    console.log(image);
+    // console.log(image);
 
     createBox(doc.data().Title, doc.data().Descrition, image, doc.data().authorName, doc.data().date, "Bloggs", doc.id);
   });
   const querySnapshot2 = await getDocs(collection(db, "Questions"));
   querySnapshot2.forEach( async(doc) => {
     // doc.data() is never undefined for query doc snapshots
-    console.log(doc.id, doc.data().Descrition);
+    // console.log(doc.id, doc.data().Descrition);
 
 
     let image = await getImage(doc.id);
-    console.log(image);
+    // console.log(image);
     createBox(doc.data().Title, doc.data().Descrition, image, doc.data().authorName, doc.data().date, "Questions", doc.id);
 
   });
@@ -160,7 +162,7 @@ getDataFromFirestore();
 let searchBox = async() =>
 {
   const searchInput = document.getElementById("searchInput").value.toUpperCase();
-  console.log(searchInput);
+  // console.log(searchInput);
   // console.log(showData.value);
   let allcard = document.querySelectorAll("#allcard");
 
@@ -168,7 +170,7 @@ let searchBox = async() =>
   {
     // let dataHold = val.querySelector("#dataHold");
     let headTag = val.querySelector("#Htitle").textContent.toUpperCase();
-    console.log(headTag);
+    // console.log(headTag);
     if(headTag.indexOf(searchInput) >-1)
     {
       val.style.display = ""
@@ -190,12 +192,12 @@ let searchBox = async() =>
   //   const docRef1 = doc(db, "Bloggs", searchInput);
   //   const docSnap1 = await getDoc(docRef1);
 
-  //   // console.log(docSnap1.data());
+    // console.log(docSnap1.data());
     
 
   //   const docRef2 = doc(db, "Questions", searchInput);
   //   const docSnap2 = await getDoc(docRef2);
-  // // console.log(docSnap2.data());
+  // console.log(docSnap2.data());
 
 
 
@@ -203,15 +205,15 @@ let searchBox = async() =>
   //   if (docSnap1.exists()) {
   //     dataContent = docSnap1.data();
   //     imageContect = await getImage(dataContent.Title);
-  //     // console.log(dataContent);
-  //     // console.log(imageContect);
+      // console.log(dataContent);
+      // console.log(imageContect);
   //   } else if (docSnap2.exists()) {
   //     dataContent = docSnap2.data();
   //     imageContect = await getImage(dataContent.Title);
-  //     // console.log(dataContent);
-  //     // console.log(imageContect);
+      // console.log(dataContent);
+      // console.log(imageContect);
   //   } else {
-  //     console.log("Document not found in either collection.");
+      // console.log("Document not found in either collection.");
   //   }
 
   
