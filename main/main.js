@@ -63,7 +63,7 @@ let createBox = (title, desc, imageURL, authorName, date, type, titleUrl) =>
   svgElement.setAttribute("class", "w-6 h-6 mr-3");
   finalWalaTag.onclick = () =>
   {
-    window.location.href = `../DisplayBlog/display.html?desc=${titleUrl}&type=${type}`;  //
+    window.location.href = `./DisplayBlog/display.html?desc=${titleUrl}&type=${type}`;  //
   }
 
   let pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -113,7 +113,7 @@ onAuthStateChanged(auth, (user) => {
     } else {
       
         loginBtn.textContent = "Login";
-        loginBtn.addEventListener("click", ()=>{window.location.href = "../login/index.html"});
+        loginBtn.addEventListener("click", ()=>{window.location.href = "./login/index.html"});
     }
   });
 
@@ -253,7 +253,7 @@ let searchBox = async() =>
 
 
 
-writeBlog.addEventListener("click", () => {window.location.href = "../CreateBlog/Blog.html"})
+writeBlog.addEventListener("click", () => {window.location.href = "./CreateBlog/Blog.html"})
 searchInput.addEventListener("input", searchBox);
 
 

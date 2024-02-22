@@ -254,7 +254,7 @@ onAuthStateChanged(auth, (user) => {
         
     } else {
         loginBtn.textContent = "Login";
-        loginBtn.addEventListener("click", ()=>{window.location.href = "../login/login.html"});
+        loginBtn.addEventListener("click", ()=>{window.location.href = "./login/login.html"});
     }
   });
 
@@ -268,4 +268,4 @@ onAuthStateChanged(auth, (user) => {
 
 
 commentSubmit.addEventListener("click", addComment);
-writeBlog.addEventListener("click", () => {window.location.href = "../CreateBlog/Blog.html"});
+writeBlog.addEventListener("click", () => {window.location.href = "./CreateBlog/Blog.html"});
