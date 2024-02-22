@@ -1,4 +1,4 @@
-import { auth, signInWithEmailAndPassword, provider, signInWithPopup, onAuthStateChanged } from "./FIREBASE/firebase";
+import { auth, signInWithEmailAndPassword, provider, signInWithPopup, onAuthStateChanged } from "./FIREBASE/firebase.js";
 
 
 
