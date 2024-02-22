@@ -36,7 +36,7 @@ const Login = (event) =>
             // Signed in 
             const user = userCredential.user;
             console.log(user);
-            window.location.href = "/main/main.html"
+            window.location.href = "../main/main.html"
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -56,7 +56,7 @@ const googleLogin = (event) =>
     signInWithPopup(auth, provider)
   .then((result) => {
    console.log(result);
-    window.location.href = "/main/main.html";
+    window.location.href = "../main/main.html";
   }).catch((error) => {
     console.log("Error", error);
   });
@@ -68,7 +68,7 @@ const googleLogin = (event) =>
 onAuthStateChanged(auth, (user) => {
   if (user && user.emailVerified) {
     const uid = user.uid;
-    window.location.href = "/main/main.html";
+    window.location.href = "../main/main.html";
   } else {
     console.log("User not login");
   }

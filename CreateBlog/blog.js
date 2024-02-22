@@ -41,7 +41,7 @@ let cancel = () =>
   imageInput.value = ""
   typeRadio.value = "";
   statusRadio.value = ""
-  window.location.href = "/main/main.html"
+  window.location.href = "../main/main.html"
 }
 
 
@@ -102,7 +102,7 @@ const createBlog = async() =>
 
     uploadBytes(storageRef, imageInput.files[0]).then((snapshot) => {
       console.log('Uploaded a blob or file!');
-      window.location.href = "/main/main.html"
+      window.location.href = "../main/main.html"
     });
     
   }
@@ -119,7 +119,7 @@ const logout = () =>
 {
     signOut(auth).then(() => {
         // Sign-out successful.
-        window.location.href = "/login/index.html";
+        window.location.href = "../login/index.html";
       }).catch((error) => {
         // An error happened.
         console.log("Error", error);
