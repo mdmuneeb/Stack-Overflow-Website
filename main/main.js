@@ -253,7 +253,7 @@ let searchBox = async() =>
 
 
 
-writeBlog.addEventListener("click", function() {window.location.href = "../CreateBlog/Blog.html"})
+writeBlog.addEventListener("click", async() => {window.location.href = "../CreateBlog/Blog.html"})
 searchInput.addEventListener("input", searchBox);
 
 
