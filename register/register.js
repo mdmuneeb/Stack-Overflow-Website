@@ -135,7 +135,7 @@ let checking = () =>
     onAuthStateChanged(auth, (user) => {
         if (user.emailVerified) {
           const uid = user.uid;
-          window.location.href = "./login/index.html"
+          window.location.href = "../index.html"
         } else {
           console.log("Email not verified");
         }

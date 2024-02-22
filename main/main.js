@@ -113,7 +113,7 @@ onAuthStateChanged(auth, (user) => {
     } else {
       
         loginBtn.textContent = "Login";
-        loginBtn.addEventListener("click", ()=>{window.location.href = "./login/index.html"});
+        loginBtn.addEventListener("click", ()=>{window.location.href = "./index.html"});
     }
   });
 
@@ -253,7 +253,7 @@ let searchBox = async() =>
 
 
 
-writeBlog.addEventListener("click", () => {window.location.href = "../CreateBlog/Blog.html"})
+writeBlog.addEventListener("click", () => {window.location.href = "../CreateBlog/blog.html"})
 searchInput.addEventListener("input", searchBox);
 
 
