@@ -20,7 +20,10 @@ const loader = () =>
     Loader.style.display = "flex";
     setTimeout(() =>
     {
-        window.location = "/register/register.html";
+        // window.location = "/register/register.html";
+        let url = window.location.host;
+        let changeURL = url.split("/").pop()
+        window.location = changeURL.concat("/login/index.html");
     }, 2000);
 }
 
